@@ -94,3 +94,90 @@ There is information in this output that you don't need to be concerned about fo
 }
 ```
 
+#### Step 2: Put a Record
+
+-  `put-record` puts a single data record containing the text "testdata" into the stream:
+`aws kinesis put-record --stream-name Foo --partition-key 123 --data testdata`
+
+- This command, if successful, will result in output similar to the following example:
+```
+{
+    "ShardId": "shardId-000000000000",
+    "SequenceNumber": "49546986683135544286507457936321625675700192471156785154"
+}
+```
+> you just added data to a stream! Next you will see how to get data out of the stream.
+
+#### Step 3: Get the Record
+Before you can get data from the stream you need to obtain the shard iterator for the shard you are interested in. A shard iterator represents the position of the stream and shard from which the consumer (`get-record` command in this case) will read. You'll use the `get-shard-iterator` command, as follows:
+
+`aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name Foo`
+
+- Recall that the `aws kinesis` commands have a Kinesis Data Streams API behind them, so if you are curious about any of the parameters shown, you can read about them in the GetShardIterator API reference topic. Successful execution will result in output similar to the following example (scroll horizontally to see the entire output):
+
+```
+{
+    "ShardIterator": "AAAAAAAAAAHSywljv0zEgPX4NyKdZ5wryMzP9yALs8NeKbUjp1IxtZs1Sp+KEd9I6AJ9ZG4lNR1EMi+9Md/nHvtLyxpfhEzYvkTZ4D9DQVz/mBYWRO6OTZRKnW9gd+efGN2aHFdkH1rJl4BL9Wyrk+ghYG22D2T1Da2EyNSH1+LAbK33gQweTJADBdyMwlo5r6PqcP2dzhg="
+}
+```
+
+- The long string of seemingly random characters is the shard iterator (yours will be different). You will need to copy/paste the shard iterator into the get command, shown next. Shard iterators have a valid lifetime of 300 seconds, which should be enough time for you to copy/paste the shard iterator into the next command. Notice you will need to remove any newlines from your shard iterator before pasting to the next command. If you get an error message that the shard iterator is no longer valid, simply execute the get-shard-iterator command again.
+
+- The `get-records` command gets data from the stream, and it resolves to a call to GetRecords in the Kinesis Data Streams API. The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. If there are no records available in the portion of the shard that the iterator points to, GetRecords returns an empty list. Note that it might take multiple calls to get to a portion of the shard that contains records.
+
+- In the following example of the get-records command (scroll horizontally to see the entire command):
+``` aws kinesis get-records --shard-iterator AAAAAAAAAAHSywljv0zEgPX4NyKdZ5wryMzP9yALs8NeKbUjp1IxtZs1Sp+KEd9I6AJ9ZG4lNR1EMi+9Md/nHvtLyxpfhEzYvkTZ4D9DQVz/mBYWRO6OTZRKnW9gd+efGN2aHFdkH1rJl4BL9Wyrk+ghYG22D2T1Da2EyNSH1+LAbK33gQweTJADBdyMwlo5r6PqcP2dzhg=
+```
+- If you are running this tutorial from a Unix-type command processor such as bash, you can automate the acquisition of the shard iterator using a nested command, like this (scroll horizontally to see the entire command):
+```
+SHARD_ITERATOR=$(aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name Foo --query 'ShardIterator')
+
+aws kinesis get-records --shard-iterator $SHARD_ITERATOR
+```
+- If you are running this tutorial from a system that supports PowerShell, you can automate acquisition of the shard iterator using a command such as this (scroll horizontally to see the entire command):
+
+```
+aws kinesis get-records --shard-iterator ((aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name Foo).split('"')[4])
+```
+
+- The successful result of the get-records command will request records from your stream for the shard that you specified when you obtained the shard iterator, as in the following example (scroll horizontally to see the entire output):
+
+```
+{
+  "Records":[ {
+    "Data":"dGVzdGRhdGE=",
+    "PartitionKey":"123”,
+    "ApproximateArrivalTimestamp": 1.441215410867E9,
+    "SequenceNumber":"49544985256907370027570885864065577703022652638596431874"
+  } ],
+  "MillisBehindLatest":24000,
+  "NextShardIterator":"AAAAAAAAAAEDOW3ugseWPE4503kqN1yN1UaodY8unE0sYslMUmC6lX9hlig5+t4RtZM0/tALfiI4QGjunVgJvQsjxjh2aLyxaAaPr+LaoENQ7eVs4EdYXgKyThTZGPcca2fVXYJWL3yafv9dsDwsYVedI66dbMZFC8rPMWc797zxQkv4pSKvPOZvrUIudb8UkH3VMzx58Is="
+}
+```
+
+#### Step 4: Clean Up
+- Finally, you'll want to delete your stream to free up resources and avoid unintended charges to your account, as previously noted. Do this in practice any time you have created a stream and will not be using it because charges accrue per stream whether you are putting and getting data with it or not. The clean-up command is simple:
+
+`aws kinesis delete-stream --stream-name Foo`
+
+- Success results in no output, so you might want to use describe-stream to check on deletion progress:
+
+`aws kinesis describe-stream --stream-name Foo`
+
+- If you execute this command immediately after the delete command, you will likely see output similar to the following example:
+```
+{
+    "StreamDescription": {
+        "StreamStatus": "DELETING",
+        "StreamName": "Foo",
+        "StreamARN": "arn:aws:kinesis:us-west-2:account-id:stream/Foo",
+        "Shards": []
+    }
+}
+```
+- After the stream is fully deleted, describe-stream will result in a "not found" error:
+```
+A client error (ResourceNotFoundException) occurred when calling the DescribeStream operation: 
+Stream Foo under account 112233445566 not found.
+```
+
