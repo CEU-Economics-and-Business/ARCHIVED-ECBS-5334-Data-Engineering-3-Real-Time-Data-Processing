@@ -36,5 +36,61 @@ The Kinesis Client Library enables fault-tolerant consumption of data from strea
 
 ### Basic Kinesis Data Stream Operations Using the AWS CLI
 **Step 1: Create a Stream**
-Your first step is to create a stream and verify that it was successfully created. Use the following command to create a stream named "Foo":
-<code> aws kinesis create-stream --stream-name Foo --shard-count 1 <code>
+- Your first step is to create a stream and verify that it was successfully created. Use the following command to create a stream named "Foo":
+
+`aws kinesis create-stream --stream-name Foo --shard-count 1`
+
+- The parameter --shard-count is required, and for this part of the tutorial you are using one shard in your stream. Next, issue the following command to check on the stream's creation progress:
+
+`aws kinesis describe-stream --stream-name Foo`
+
+- You should get output that is similar to the following example:
+```
+{
+    "StreamDescription": {
+        "StreamStatus": "CREATING",
+        "StreamName": "Foo",
+        "StreamARN": "arn:aws:kinesis:us-west-2:account-id:stream/Foo",
+        "Shards": []
+    }
+}
+```
+
+- In this example, the stream has a status CREATING, which means it is not quite ready to use. Check again in a few moments, and you should see output similar to the following example:
+
+```
+{
+    "StreamDescription": {
+        "StreamStatus": "ACTIVE",
+        "StreamName": "Foo",
+        "StreamARN": "arn:aws:kinesis:us-west-2:account-id:stream/Foo",
+        "Shards": [
+            {
+                "ShardId": "shardId-000000000000",
+                "HashKeyRange": {
+                    "EndingHashKey": "170141183460469231731687303715884105727",
+                    "StartingHashKey": "0"
+                },
+                "SequenceNumberRange": {
+                    "StartingSequenceNumber": "49546986683135544286507457935754639466300920667981217794"
+                }
+            }
+        ]
+    }
+}
+```
+
+There is information in this output that you don't need to be concerned about for this tutorial. The main thing for now is "StreamStatus": "ACTIVE", which tells you that the stream is ready to be used, and the information on the single shard that you requested. You can also verify the existence of your new stream by using the list-streams command, as shown here:
+
+`aws kinesis list-streams`
+
+- Output:
+
+```
+{
+    "StreamNames": [
+        "Foo"
+    ]
+}
+```
+
