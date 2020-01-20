@@ -36,9 +36,9 @@ By the end of the course you will:
 - Understand the caveats that arise when you take these systems to production
 - You will have hands-on knowledge on how to build a simple, end-to-end real-time pipeline with Amazon Web Services (AWS) and Apache Spark
 
-**Reading List** - Data, presentations, and code for the exercises will be provided. There is no compulsory reading for the class. 
-
 #### Suggested readings:
+Note: Data, presentations, and code for the exercises will be provided. There is no compulsory reading for the class. 
+
 - I Heart Logs: Event Data, Stream Processing, and Data Integration
 - Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems by Martin Kleppmann(sections)
 
