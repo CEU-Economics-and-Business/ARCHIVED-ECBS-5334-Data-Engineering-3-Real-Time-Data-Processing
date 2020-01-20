@@ -38,9 +38,9 @@ By the end of the course you will:
 
 **Reading List** - Data, presentations, and code for the exercises will be provided. There is no compulsory reading for the class. 
 
-Suggested readings:
-- Jay Kreps: I heart logs
-- Martin Kleppmann: Designing Data-Intensive Applications (sections)
+#### Suggested readings:
+- I Heart Logs: Event Data, Stream Processing, and Data Integration
+- Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems by Martin Kleppmann(sections)
 
 **Course schedule and materials for each session** 
 
