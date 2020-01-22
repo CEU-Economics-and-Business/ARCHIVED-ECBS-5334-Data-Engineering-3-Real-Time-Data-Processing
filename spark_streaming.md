@@ -55,13 +55,19 @@ Note: this does not immediately start reading the streaming data; it only sets u
 #### STEP 2 - TRANSFORM DATA
 
 ```python
+#  splitting the lines into individual words and then count them
    words = lines.select(split(col("value"), "\s").alias("word"))
           counts = words.groupBy("word").count()
 ```
+- Note that the above DataFrame operations to transform the lines streaming DataFrame would work in the exact same way if lines were a batch DataFrame
 
 
+To understand which operations are supported in Structured Streaming, you have to recognize the two broad classes of data transformations.
 
+>**Stateless transformations:** Operations like `select`, `filter`, `map`, etc. do not require any information from previous rows to process the next row; each row can be processed by itself. The lack of previous “state” in these operation make them stateless. Stateless operations can be applied to both batch and streaming DataFrames. For instance, the flatMap operation in our code snippet is a stateless operation.
 
+>**Stateful transformations:** In contrast, an aggregation operation like count in the above snippet requires maintaining state to combine data across multiple rows. More specifically, any DataFrame operation involving `grouping`, `joining` or `aggregations` are stateful transformations. While many of these operations are supported in Structured Streaming, a few combinations of them are not supported because it is either computationally hard, or infeasible to compute them in an incremental manner.
 
+#### STEP 3: DEFINE OUTPUT SINK AND OUTPUT MODE
 
 
