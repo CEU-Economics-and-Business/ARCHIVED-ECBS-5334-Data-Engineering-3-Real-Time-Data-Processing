@@ -23,6 +23,8 @@ The problem is that it's not possible to start writing the data to a large datab
   - General purpose, widely used
   - Connects with a lot of the previously mentioned streaming tools
   - Fault tolterant thanks to projects like HDFS
+  - Allows for tracking frequently-updated datasets
+    - **Example:** Can use it to track most popular hashtags in 5 mins windows based on their counts in a Twitter stream, and by using the `StreamingContext` function.
 
 
 
