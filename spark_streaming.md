@@ -25,11 +25,18 @@ The problem is that it's not possible to start writing the data to a large datab
   - Fault tolterant thanks to projects like HDFS
   - Allows for tracking frequently-updated datasets
     - **Example:** Can use it to track most popular hashtags in 5 mins windows based on their counts in a Twitter stream, and by using the `StreamingContext` function.
+    
+    
+### Setup - Getting Started
 
+- Download & Install VirtualBox (Note: **Optional** - we are using Databricks)
+https://www.virtualbox.org/wiki/Downloads
+- Win: Download Ubuntu Desktop (Note: **Optional** - we are using Databricks)
+https://ubuntu.com/download/desktop
+- `sudo pip3 install py4j` (Note: **Optional** - we are using Databricks)
+- Download Spark & Hadoop (Note: **Optional** - we are using Databricks)
 
-
-
-
+### Demo Streaming
 
 
 
