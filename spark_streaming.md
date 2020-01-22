@@ -1,5 +1,33 @@
 ### Spark Structured Streaming
 
+- Structured Streaming is built atop the Spark SQL engine and DataFrame-based APIs
+- A stream is viewed as a continually growing table, with new rows of data appended at the end. 
+  - Since it's a structured table, you can issue queries against it 
+- This structured model obviated the old DStreams model
+- Underneath the structured streaming model, the Spark SQL core engine handles all aspects of fault-tolerance and late-data semantics
+- Streaming data sources include Apache Kafka, Kinesis, and HDFS-based or cloud storage
+
+**Example: Hello World “word count” of a streaming application**
+```python
+# read from Kafka stream
+  lines = (spark.readStream 
+  .format("kafka") 
+  .option("subscribe", "input") 
+  .load())
+             
+  # perform transformation
+  wordCounts = (lines.groupBy("value.cast(‘string’) as key") 
+   .agg(count("*") as "value") )
+
+  # write back out to the stream
+  query = (wordCounts.writeStream() 
+   .format("kafka") 
+   .option("topic", "output")) 
+```
+
+- Structured Streaming was designed from scratch with one core philosophy -- for developers, writing stream processing pipelines should be as easy as writing batch pipelines. 
+
+
 ### Introduction
 Data pipeline in its core concept is a chain of different sources and processors in a logical flow that takes source data in its raw form into a process form that can be consumed by the application. There are data sources everywhere: around your enterprise, connected devices, connected cars, sensors, user tracking - coming at fast pace. Companies want to get inside and see what is happening with the data that they have in their hands and they want to do it as fast as possible to understand what people are doing with e.g their applications real time. 
 
