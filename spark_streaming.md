@@ -6,25 +6,6 @@
 - This structured model obviated the old DStreams model
 - Underneath the structured streaming model, the Spark SQL core engine handles all aspects of fault-tolerance and late-data semantics
 - Streaming data sources include Apache Kafka, Kinesis, and HDFS-based or cloud storage
-
-**Example: Hello World “word count” of a streaming application**
-```python
-# read from Kafka stream
-  lines = (spark.readStream 
-  .format("kafka") 
-  .option("subscribe", "input") 
-  .load())
-             
-  # perform transformation
-  wordCounts = (lines.groupBy("value.cast(‘string’) as key") 
-   .agg(count("*") as "value") )
-
-  # write back out to the stream
-  query = (wordCounts.writeStream() 
-   .format("kafka") 
-   .option("topic", "output")) 
-```
-
 - Structured Streaming was designed from scratch with one core philosophy -- for developers, writing stream processing pipelines should be as easy as writing batch pipelines. 
 
 
@@ -55,20 +36,28 @@ The problem is that it's not possible to start writing the data to a large datab
     - **Example:** Can use it to track most popular hashtags in 5 mins windows based on their counts in a Twitter stream, and by using the `StreamingContext` function.
     
     
-### Setup - Getting Started
+### Five Steps to Define a Streaming Query
 
-- Download & Install VirtualBox (Note: **Optional** - we are using Databricks)
-https://www.virtualbox.org/wiki/Downloads
-- Win: Download Ubuntu Desktop (Note: **Optional** - we are using Databricks)
-https://ubuntu.com/download/desktop
-- `sudo pip3 install py4j` (Note: **Optional** - we are using Databricks)
-- Download Spark & Hadoop (Note: **Optional** - we are using Databricks)
+#### STEP 1 - DEFINE INPUT SOURCES
+- As with batch queries, the first step is to define a DataFrame from a streaming source
+- Here is an example of creating a DataFrame from a text data stream to be received over a socket connection.
+```python
+    spark = SparkSession…
+           lines = ( spark
+           .readStream.format("socket")
+           .option("host", "localhost")
+           .option("port", 9999)
+           .load() )
+```
+Note: this does not immediately start reading the streaming data; it only sets up the configurations necessary for reading the data once the streaming query is explicitly started.
 
-### Demo Streaming
 
+#### STEP 2 - TRANSFORM DATA
 
-
-
+```python
+   words = lines.select(split(col("value"), "\s").alias("word"))
+          counts = words.groupBy("word").count()
+```
 
 
 
