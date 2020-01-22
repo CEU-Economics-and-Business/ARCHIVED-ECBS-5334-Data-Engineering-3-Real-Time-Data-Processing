@@ -70,4 +70,9 @@ To understand which operations are supported in Structured Streaming, you have t
 
 #### STEP 3: DEFINE OUTPUT SINK AND OUTPUT MODE
 
-
+```python
+    writer = ( counts.writeStream
+          .format("console")
+          .outputMode("complete") )
+```
+Here we have specified “console” as the output streaming sink and “complete” as the output mode. The output mode of a streaming query specifies what part of the updated output to write out after processing new input data.
