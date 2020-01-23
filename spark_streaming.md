@@ -1,3 +1,12 @@
+Things to be covered in this markdown but are missing:
+- JSON files
+- Spark Shuffle partitions , shuffle recap
+- Schema recap
+- Batch vs stream processing
+- Sockets
+- Joins
+- Windowing
+
 ### Spark Structured Streaming
 
 - Structured Streaming is built atop the Spark SQL engine and DataFrame-based APIs
