@@ -69,10 +69,51 @@ To understand which operations are supported in Structured Streaming, you have t
 >**Stateful transformations:** In contrast, an aggregation operation like count in the above snippet requires maintaining state to combine data across multiple rows. More specifically, any DataFrame operation involving `grouping`, `joining` or `aggregations` are stateful transformations. While many of these operations are supported in Structured Streaming, a few combinations of them are not supported because it is either computationally hard, or infeasible to compute them in an incremental manner.
 
 #### STEP 3: DEFINE OUTPUT SINK AND OUTPUT MODE
+After transforming the data, we can define how to write the processed output data with DataFrame.writeStream.
 
 ```python
     writer = ( counts.writeStream
           .format("console")
           .outputMode("complete") )
 ```
+
 Here we have specified “console” as the output streaming sink and “complete” as the output mode. The output mode of a streaming query specifies what part of the updated output to write out after processing new input data.
+
+- .outputMode **("complete")** ==  All the rows of the result table/DataFrame will be outputted at the end of every trigger. This is supported by queries where the result table is likely to be much smaller than the input data and is therefore feasible to be retained in memory
+
+- .outputMode **("append")** == This is the default mode, where only the new rows added to the result table/DataFrame (for example, the counts table) since the last trigger will be outputted to the sink.
+
+- .outputMode **("update")** == Only the rows of result that were updated since the last trigger will be outputted at the end of every trigger
+
+**Besides writing the output to the console, Structured Streaming natively supports streaming writes to:**
+- Files
+- Apache Kafka
+- In addition, you can write to arbitrary locations using the `foreachBatch` and `foreach` API methods
+
+#### STEP 4: SPECIFY PROCESSING DETAILS
+
+Now, we have to decide how we will go about processing the data. Processing details are as follows:
+
+Here we have specified two details using the `DataStreamWriter` that we had created with `DataFrame.writeStream`.
+
+```python
+checkpoint_dir = "..."
+     writer2 = ( writer
+     .trigger(Trigger.ProcessingTime("1 second"))
+     .option("checkpointLocation", checkpoint_dir))
+```
+
+Now let's explain our options here when it comes to triggering details (processing of newly available streaming data):
+
+1.) **ProcessingTime**
+- `ProcessingTime` with or without a trigger interval e.g `Trigger.ProcessingTime("1 second")`
+  - This is the default mode
+    - By default, when no trigger is specified, a query triggers the next micro-batch as soon as the previous micro-batch has completed
+    - Alternatively, you can explicitly specify the `ProcessTime` trigger with an interval, and the query will trigger micro-batches at that fixed internal
+    
+
+
+
+
+
+
