@@ -110,10 +110,60 @@ Now let's explain our options here when it comes to triggering details (processi
   - This is the default mode
     - By default, when no trigger is specified, a query triggers the next micro-batch as soon as the previous micro-batch has completed
     - Alternatively, you can explicitly specify the `ProcessTime` trigger with an interval, and the query will trigger micro-batches at that fixed internal
-    
+
+2.) **Once**
+- In this mode, the streaming query will execute exactly one micro-batch - it processes all the new data available in a single batch and then stops itself. For example, it's great when you want to control cost by only executing a query once per day. 
+
+3.) **Continuous**
+- While only a small subset of DataFrame operations allow this mode to be used, it can provide much lower latency (as low as milliseconds) than the micro-batch trigger modes. 
+
+4.) **Checkpoint location**
+- This is a directory in any HDFS-compatible file system where a streaming query saves its progress information, that is, what data has been successfully processed. **Upon failure, this metadata is used to restart the failed query exactly where it left off.** Therefore, setting this option is necessary for failure recovery with exactly-once guarantees.
+
+#### STEP 5: STARTING THE QUERY
+
+Now, we've specified everything - we can start the query.
+
+```python
+ streaming_query = writer2.start()
+ ```
+ The returned instance of type `StreamingQuery` represents an active query and can be used to manage the query.
+
+1.) `start()` is a non-blocking method, so it will return as soon as the query has been started in the background.
+
+2.) If you want the main thread to block until the streaming query has terminated, you can use `streamingQuery.awaitTermination()`.
+
+3.)  If the query fails in the background with an error,`awaitTermination()` will also fail with that same exception
+
+4.) You can wait up to a time out duration using `awaitTermination(timeoutMillis)`
+
+5.) You can explicitly stop the query with `streamingQuery.stop()`.
 
 
+#### STEP 6: PUTTING IT ALL TOGETHER
+Here's what we have done so far:
 
+```python
+spark = SparkSession...
+      lines = ( spark
+      .readStream.format("socket")
+      .option("host", "localhost")
+       .option("port", 9999)
+       .load() )
+      words = lines.select(split(col("value"), "\s").alias("word"))
+      counts = words.groupBy("word").count()
+       checkpoint_dir = "..."
+      streaming_query = ( 
+      counts.writeStream
+      .format("console")
+      .outputMode("complete")
+       .trigger(processingTime = "1 second"))
+       .option("checkpointLocation", checkpoint_dir)
+      .start() )
+      streaming_query.awaitTermination()
+```
 
+- After the query has started, a background thread continuously reads new data from the streaming source, processes it, and writes it to the streaming sinks 
+          
 
 
