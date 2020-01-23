@@ -144,21 +144,30 @@ Now, we've specified everything - we can start the query.
 Here's what we have done so far:
 
 ```python
+
+# STEP 1
 spark = SparkSession...
       lines = ( spark
       .readStream.format("socket")
       .option("host", "localhost")
        .option("port", 9999)
        .load() )
+       
+# STEP 2
       words = lines.select(split(col("value"), "\s").alias("word"))
       counts = words.groupBy("word").count()
+
+# STEP 3
        checkpoint_dir = "..."
       streaming_query = ( 
       counts.writeStream
       .format("console")
       .outputMode("complete")
+# STEP 4
        .trigger(processingTime = "1 second"))
        .option("checkpointLocation", checkpoint_dir)
+
+# STEP 5
       .start() )
       streaming_query.awaitTermination()
 ```
