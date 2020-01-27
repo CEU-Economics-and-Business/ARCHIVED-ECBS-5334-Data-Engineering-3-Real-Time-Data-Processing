@@ -1,6 +1,6 @@
 [Home](./README.md) | 
 [Overview](./overview.md) | 
-[Message Brokers](./message_brokers.md) | 
+[Logs](./logs.md) | 
 [Structured Streaming](./spark_streaming.md) | 
 [Amazon Kinsesis](./amazon_kinesis.md) | 
 [Machine Learning](./machine_learning.md) | 
