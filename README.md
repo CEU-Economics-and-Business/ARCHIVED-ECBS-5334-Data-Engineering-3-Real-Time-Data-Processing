@@ -22,7 +22,9 @@ Welcome to Data Engineering 3: Real-Time Data Processing.
 **Prerequisites:** 
 
 > Data Analysis 1: Exploration – Business Analytics track;
+
 > Data Analysis 2: Finding Patterns with Regressions – Business Analytics track;
+
 > Data Engineering 2: Big Data and Cloud Computing
 
 **Course description**
