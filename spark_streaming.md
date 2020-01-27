@@ -1,4 +1,4 @@
-## To be updated
+## To be updated w/ more material, pictures & vids
 
 Things to be covered in this markdown but are missing:
 - JSON files
@@ -8,6 +8,8 @@ Things to be covered in this markdown but are missing:
 - Sockets
 - Joins
 - Windowing
+
+* * *
 
 ### Spark Structured Streaming
 
