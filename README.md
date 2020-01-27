@@ -1,5 +1,4 @@
 [Home](./README.md) | 
-[Overview](./overview.md) | 
 [Logs](./logs.md) | 
 [Structured Streaming](./spark_streaming.md) | 
 [Amazon Kinsesis](./amazon_kinesis.md) | 
