@@ -48,7 +48,7 @@ Note: Data, presentations, and code for the exercises will be provided. There is
 2. Message Brokers
 3. Intro to real-time data processing systems and Apache Spark’s Streaming module
 4. Real-time processing with Amazon Kinesis and Kinesis Analytics
-5. Deploying machine learning models to production for real-time predictions
+5. Deploying Machine Learning models to production for real-time predictions
 
 # Contact
 |Instructor  | Teaching Assistant |
