@@ -134,7 +134,7 @@ In case of a single server variables can be stored in memory/disk and can be upd
 
 **Making the data available is one of the more valuable goals that an organization can focus on**
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzp0ih-4XzjzSavzQB3xOeZfeGkjnKEquS28QsaXh7wde-NNPQ&s" width="400" height="200">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzp0ih-4XzjzSavzQB3xOeZfeGkjnKEquS28QsaXh7wde-NNPQ&s" width="250" height="200">
 
 
 
