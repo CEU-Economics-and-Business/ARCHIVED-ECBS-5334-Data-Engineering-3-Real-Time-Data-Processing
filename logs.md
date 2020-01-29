@@ -46,6 +46,7 @@
 
 **Other use-cases of log:**
 1.) publish/subscribe mechanism to transmit data to other replicas
+
 2.) consistency mechanism to order the updates that are applied to multiple replicas
 
 * * * 
