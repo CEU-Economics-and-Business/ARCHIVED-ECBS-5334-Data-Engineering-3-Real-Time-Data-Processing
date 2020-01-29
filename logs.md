@@ -183,7 +183,7 @@ The log also acts as a buffer that makes data production asynchronous from data 
 * * *
 
 **A fully connected architecture that has a separate pipeline between each system**
-Imagine a a company's architecture (as shown below) - the dozens of data systems and data repositories. Connecting all of these would have led to building custom piping between each pair of systems, looking something like:
+Imagine a a company's architecture (as shown below) - the dozens of data systems and data repositories. Connecting all of these would lead to building custom piping between each pair of systems, looking something like:
 <img src="https://pbs.twimg.com/media/DS1mpfmWsAAixoa.jpg" width="400" height="250">
 
 It's worth noting that the data flows in both directions - it would take an army of developers to build `O(N^2)` pipelines
