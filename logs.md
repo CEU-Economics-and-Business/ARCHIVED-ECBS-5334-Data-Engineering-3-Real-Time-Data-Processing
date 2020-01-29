@@ -64,8 +64,6 @@ Two deterministic pieces of code => the same input log => the same output => in 
 **Application in distributed systems:**
 - Squeeze all the nondeterminism out of the input stream to ensure that each replica that is processing this input stays in sync
 
->**Key takeaway:** “Deterministic processing is deterministic.”
-
 - You can describe the state of each replica by a single number: the `timestamp` for the maximum log entry that it has processed
   - Two replicas at the same time will be in the same state
     - This timestamp combined with the log uniquely capture the entire state of the replica
