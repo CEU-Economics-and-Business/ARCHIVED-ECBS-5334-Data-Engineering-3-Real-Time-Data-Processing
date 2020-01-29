@@ -209,5 +209,36 @@ Imagine a a company's architecture (as shown below) - the dozens of data systems
 
 #### ETL and Organizational Scalability
 
+- Have a central pipeline, the log, with a well-defined API for adding data
+- Part of the system design and implementation is to consider the problem of getting data out and into a well-structured form for delivery to the central pipeline
+- The addition of new storage systems is of no consequence to the data ware‐ house team, as they have a central point of integration
+-  The data warehouse team handles only the simpler problem of loading structured feeds of data from the central log and carrying out transformation specific to their system
+
+**Where should Data Transformations happen?** 
+(Note there can be stream + batch stuff)
+-  By the data producer prior to adding the data to the company-wide log
+    - These details are best handled by the team that creates the data since that team knows the most about its own data. Any logic applied in this stage should be lossless and reversible.
+   
+-  Real-time transformation on the log (which in turn produces a new, transformed log)
+    - Any kind of value-added transformation that can be done in real-time should be done as post-processing on the raw log feed that was produced
+    
+-  Part of the load process into some destination data system
+
+* * *
+
+#### Scaling a Log
+
+- If you want to keep a commit log that acts as a multisubscriber real-time journal of everything happening on a consumer-scale website, scalability will be a primary "challenge"
+  - Solution: As an example, LinkedIn writes hundreds of billions of messages to production Kafka clusters each day. How?
+    -  Partitioning the log
+    - Optimizing throughput by batching reads and writes
+    - Avoiding needless data copies
+In order to allow horizontal scaling chop up log into partitions. By partitioning the log, we allow each partition to act independently of all other partitions. This lets us horizontally scale the write throughput.
+
+
+
+
+
+
 
 
