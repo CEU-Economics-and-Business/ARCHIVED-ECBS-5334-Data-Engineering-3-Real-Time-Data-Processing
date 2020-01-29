@@ -4,8 +4,6 @@
 
 * * *
 
-### Overview
-
 #### Log
 
 <img src="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0101.png" width="400" height="200">
@@ -46,9 +44,9 @@
 
 **Other use-cases of log:**
 
-1.) publish/subscribe mechanism to transmit data to other replicas
+1.) Publish/subscribe mechanism to transmit data to other replicas
 
-2.) consistency mechanism to order the updates that are applied to multiple replicas
+2.) Consistency mechanism to order the updates that are applied to multiple replicas
 
 * * * 
 
