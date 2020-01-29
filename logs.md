@@ -51,7 +51,6 @@
 * * * 
 
 #### Logs in Distributed Systems 
-a.k.a General tools for distributed systems design
 
 - The log-centric approach to distributed systems arises from a simple observation
 
