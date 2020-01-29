@@ -30,13 +30,23 @@
 
 - Logs look like a file or a table. (array of bytes, array of records). However, it is important that we think about the log as an abstract data structure, not a text file
 
-<center>The question is - Why study logs?</center>
-<p style="text-align: center;">They record what happened and when</p>
+**Key takeaway: Logs record what happened and when!**
 
+#### Logs in Databases
 
+- Logs usage in databases: keeping in sync a variety of data structures and indexes in the presence of crashes
+  - Logs write out information about the database records it will be modifying before applying the changes to all the various data structures that it maintains
+  - The log is the record of what happened, and each table or index is a pro‐ jection of this history into some useful data structure or index
+  - It is used as the authoritative source in restoring all other persistent structures in the event of a crash
+  - Log is a method for replicating data between databases - (the sequence of changes that hap‐ pened on the database is exactly what is needed to keep a remote replica database in sync)
+    - Oracle, MySQL, PostgreSQL, and MongoDB include log shipping protocols (replica databases that act as slaves)
+    - The slaves can then apply the changes recorded in the log to their own local data structures to stay in sync with the master
 
+**Other use-cases of log:**
+1.) publish/subscribe mechanism to transmit data to other replicas
+2.) consistency mechanism to order the updates that are applied to multiple replicas
 
-
+#### Logs in Distributed Systems
 
 
 
