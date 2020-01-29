@@ -80,6 +80,11 @@ Two deterministic pieces of code => the same input log => the same output => in 
 - (1) **State Machine Model** is an active-active model, where we keep a log of the incoming requests and each replica processes each request in log order
   - (2) Slightly modified **Primary-Backup Model** elects one replica as the leader. This leader processes requests in the order they arrive and logs the changes to its state that occur as a result of processing the requests. Other replicas apply the state changes that the leader makes so that they will be in sync and ready to take over as leader, should the leader fail.
   
+Figure explanation:
+  **Primary Backup Model**: The `Master` node handles all reads and writes. Each write is posted to The Log. `Slaves` are subscribed to this log and they apply the changes that the master executed. So if the `Master` fails - a new Master is elected from the `Slaves`
+
+**State Machine Replication Model:** All nodes are peers. Writes first go to The Log and all nodes apply the write in the order determined by The Log.
+  
   <img src="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0103.png" width="400" height="200">
 
 
