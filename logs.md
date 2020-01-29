@@ -184,13 +184,30 @@ The log also acts as a buffer that makes data production asynchronous from data 
 
 **A fully connected architecture that has a separate pipeline between each system**
 Imagine a a company's architecture (as shown below) - the dozens of data systems and data repositories. Connecting all of these would lead to building custom piping between each pair of systems, looking something like:
+- It's worth noting that the data flows in both directions - it would take an army of developers to build `O(N^2)` pipelines
 
 <img src="https://pbs.twimg.com/media/DS1mpfmWsAAixoa.jpg" width="400" height="250">
 
-It's worth noting that the data flows in both directions - it would take an army of developers to build `O(N^2)` pipelines
+
+**Instead - An architecture built around a central hub:**
+- As much as possible, we needed to isolate each consumer from the source of the data
+- So connect new data system (data source / data destination) to a single pipeline instead of to each consumer of data
 
 <img src= "assets/log.png" width="400" height="250">
 
+* * *
+
+#### Relationship to ETL and the Data Warehouse
+
+- The data warehouse is a repository for the clean, integrated data structured to support analysis
+  - Data warehousing methodology involves periodically extracting data from source databases, munging it into some kind of understandable form, and loading it into a central data warehouse
+    - The central location contains a clean copy of all your data (great asset for data-intensive analysis and processing)
+- **Problem:** having a batch system be the only repository of clean, complete data means the data is unavailable for systems requiring a real-time feed: real-time processing, search indexing, monitoring systems, and so on
+  - The clean, integrated repository of data should also be available in real time for low-latency processing, and for indexing in other real-time storage systems
+  
+* * * 
+
+#### ETL and Organizational Scalability
 
 
 
