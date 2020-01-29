@@ -189,9 +189,7 @@ Imagine a a company's architecture (as shown below) - the dozens of data systems
 
 It's worth noting that the data flows in both directions - it would take an army of developers to build `O(N^2)` pipelines
 
-![log](assets/log.png "LinkedIn log"){:height="250px" width="400px"}.
-
-<img src= "assets/log.png" width="120" height="120">
+<img src= "assets/log.png" width="400" height="250">
 
 
 
