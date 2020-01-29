@@ -128,4 +128,18 @@ In case of a single server variables can be stored in memory/disk and can be upd
 
 * * *
 
+#### Data Integration
+
+>Data integration means making available all the data that an organization has to all the services and systems that need it. It's like ETS - extract, transform, and load. However, it also encompasses real-time systems and processing flows.
+
+**Making the data available is one of the more valuable goals that an organization can focus on**
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzp0ih-4XzjzSavzQB3xOeZfeGkjnKEquS28QsaXh7wde-NNPQ&s" width="400" height="200">
+
+
+
+
+
+
+
 
