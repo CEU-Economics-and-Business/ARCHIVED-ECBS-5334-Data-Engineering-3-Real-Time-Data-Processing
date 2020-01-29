@@ -32,6 +32,8 @@
 
 **Key takeaway: Logs record what happened and when!**
 
+* * *
+
 #### Logs in Databases
 
 - Logs usage in databases: keeping in sync a variety of data structures and indexes in the presence of crashes
@@ -46,7 +48,33 @@
 1.) publish/subscribe mechanism to transmit data to other replicas
 2.) consistency mechanism to order the updates that are applied to multiple replicas
 
-#### Logs in Distributed Systems
+* * * 
+
+#### Logs in Distributed Systems 
+a.k.a General tools for distributed systems design
+
+- The log-centric approach to distributed systems arises from a simple observation
+
+>If two identical, **deterministic** processes begin in the same **state** and get the same inputs in the same order, they will produce the same output and end in the same state.
+
+- *Deterministic:means that the processing isn’t timing dependent and doesn’t let any other out-of-band input influence its results*
+- *State: of the process is whatever data remains on the machine, either in memory or on disk, after our processing*
+
+Two deterministic pieces of code => the same input log => the same output => in the same order
+
+**Application in distributed systems:**
+- Squeeze all the nondeterminism out of the input stream to ensure that each replica that is processing this input stays in sync
+
+>**Key takeaway:** “Deterministic processing is deterministic.”
+
+- You can describe the state of each replica by a single number: the `timestamp` for the maximum log entry that it has processed
+  - Two replicas at the same time will be in the same state
+    - This timestamp combined with the log uniquely capture the entire state of the replica
+    - This gives a discrete, event-driven notion of time that, unlike the machine’s local clocks, is easily compara‐ ble between different machines
+
+* * *
+
+
 
 
 
