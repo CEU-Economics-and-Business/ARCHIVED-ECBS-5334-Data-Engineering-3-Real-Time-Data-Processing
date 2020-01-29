@@ -233,12 +233,29 @@ Imagine a a company's architecture (as shown below) - the dozens of data systems
     -  Partitioning the log
     - Optimizing throughput by batching reads and writes
     - Avoiding needless data copies
-In order to allow horizontal scaling chop up log into partitions. By partitioning the log, we allow each partition to act independently of all other partitions. This lets us horizontally scale the write throughput.
+    
+In order to allow horizontal scaling chop up log into partitions. By partitioning the log, we allow each partition to act independently of all other partitions. This lets us horizontally scale the write throughput:
+
+<img src= "assets/partition.png" width="400" height="250">
+
+- Each partition is a totally ordered log, but there is no global ordering between partitions
+- Partitioning allows log appends to occur without coordination between shards, and allows the throughput of the system to scale linearly with the Kafka cluster size while still maintaining ordering within the sharding key
+- Each partition is replicated across a configurable number of replicas, each of which has an identical copy of the partition’s log
+  - At any time, a single partition will act as the leader; if the leader fails, one of the replicas will take over as leader
+- Each partition is order preserving, and Kafka guarantees that appends to a particular partition from a single sender will be delivered in the order they are sent
+- A log, like a filesystem, is easy to optimize for linear read and write patterns
+  - The log can group small reads and writes together into larger, high-throughput operations
+- Simple binary format that is maintained between in-memory log, on-disk log, and in-network data transfers
+  - This allows us to make use of numerous optimizations, including *zero-copy data transfer*.
+  
+>The cumulative effect of these optimizations, is that you can usually write and read data at the rate supported by the disk or network, even while maintaining data sets that vastly exceed memory. 
 
 
+**For example**, a single thread can write 100-byte messages at a rate of about 750k messages per second, each being stored with 3x replication. Reading is even faster at about 900k messages per second. More benchmarks are available.
 
+* * *
 
-
+#### Logs and Real-Time Stream Processing
 
 
 
