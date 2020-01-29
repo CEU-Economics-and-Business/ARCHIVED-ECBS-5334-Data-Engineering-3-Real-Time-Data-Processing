@@ -24,7 +24,7 @@
   - Entries to the left are defined to be older then entries to the right
   - The log entry number can be thought of as the “timestamp” of the entry
 
->A file is an array of bytes, a table is an array of records, and a log is really just a kind of table or file where the records are sorted by time
+A file is an array of bytes, a table is an array of records, and a log is really just a kind of table or file where the records are sorted by time
 
 - Logs look like a file or a table. (array of bytes, array of records). However, it is important that we think about the log as an abstract data structure, not a text file
 
@@ -56,8 +56,8 @@
 
 >If two identical, **deterministic** processes begin in the same **state** and get the same inputs in the same order, they will produce the same output and end in the same state.
 
-- *Deterministic:means that the processing isn’t timing dependent and doesn’t let any other out-of-band input influence its results*
-- *State: of the process is whatever data remains on the machine, either in memory or on disk, after our processing*
+- **Deterministic:** means that the processing isn’t timing dependent and doesn’t let any other out-of-band input influence its results
+- **State:** of the process is whatever data remains on the machine, either in memory or on disk, after our processing
 
 Two deterministic pieces of code => the same input log => the same output => in the same order
 
