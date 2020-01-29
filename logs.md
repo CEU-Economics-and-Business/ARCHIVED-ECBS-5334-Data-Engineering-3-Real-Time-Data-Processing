@@ -52,8 +52,6 @@ A file is an array of bytes, a table is an array of records, and a log is really
 
 #### Logs in Distributed Systems 
 
-- The log-centric approach to distributed systems arises from a simple observation
-
 >If two identical, **deterministic** processes begin in the same **state** and get the same inputs in the same order, they will produce the same output and end in the same state.
 
 - **Deterministic:** means that the processing isn’t timing dependent and doesn’t let any other out-of-band input influence its results
