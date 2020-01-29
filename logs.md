@@ -170,11 +170,18 @@ Figure explanation:
 
 - A log can be used for publish-subscribe messaging
 - The publisher appends to the log and each subscriber keeps a pointer to its position in the log, allowing it to read independently
+- The log concept gives a logical clock for each change against which all subscribers can be measured
+  - This makes reasoning about the state of the different subscriber systems with respect to one another far simpler, as each has a point in time up to which it has read
+- The destination system only knows about the log and does not know any details of the system of origin
 
 <img src="https://miro.medium.com/max/3540/1*PMjRSVuUh7MgsUrOV5Kl3A.png" height="200" width="400">
 
+The log also acts as a buffer that makes data production asynchronous from data consumption. It's important because when there are multiple subscribers - they all consume at different rates. Subscribing systems can crash andf go down for maintenance, batch systems don't track real-time whilst real-time query systems do. Neither the originating data source nor the log has knowledge of the various data destination systems, so consumer systems can be added and removed with no change in the pipeline.
+
+>This isn’t the end of the story of mastering data flow: the rest of the story is around metadata, schemas, compatibility, and the details of handling data structure and evolution. Until there is a reliable, general way of handling the mechanics of data flow, the semantic details are secondary.
 
 
-
-
+**A fully connected architecture that has a separate pipeline between each system**
+Imagine a a companz's architecture (as shown below) - the dozens of data systems and data repositories. Connecting all of these would have led to building custom piping between each pair of systems, looking something like:
+<img src="https://pbs.twimg.com/media/DS1mpfmWsAAixoa.jpg" width="400" height="250">
 
