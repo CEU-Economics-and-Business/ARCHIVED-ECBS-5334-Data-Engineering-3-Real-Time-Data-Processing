@@ -73,7 +73,14 @@ Two deterministic pieces of code => the same input log => the same output => in 
 
 * * *
 
+#### Log-Centric Designs
 
+- **Physical** (or row-based logging) means logging the contents of each row that is changed
+- **Logical** (or statement logging) means not logging the changed rows, but instead logging the SQL commands that lead to the row changes (the insert, update, and delete statements)
+- (1) **State machine model** is an active-active model, where we keep a log of the incoming requests and each replica processes each request in log order
+  - (2) Slightly modified **primary-backup model** elects one replica as the leader. This leader processes requests in the order they arrive and logs the changes to its state that occur as a result of processing the requests. Other replicas apply the state changes that the leader makes so that they will be in sync and ready to take over as leader, should the leader fail.
+  
+  <img src="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0103.png" width="400" height="200">
 
 
 
