@@ -85,5 +85,37 @@ Figure explanation:
   
   <img src="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0103.png" width="400" height="200">
 
+* * * 
+
+#### Example
+
+Say we want to implement a replicated arithmetic service that maintains a set of variables (initialized to zero) and applies additions, multiplications, subtrac‐ tions, divisions, and queries on these values.
+
+Commands:
+```
+x? // get the current value of x x+=5 // add 5 to x
+x-=2 // subtract 2 from x
+y*=2 // double y
+```
+
+In case of a single server variables can be stored in memory/disk and can be updated in whatever order it receives requests. But single server == lack of fault tolerance => we cannot scale the serving. 
+
+**How do we solve this problem?**
+
+- We can add more servers** that replicate this state and the processing logic. 
+  - *Problem with this? Servers might get out of sync e.g a failed server misses updates.*
+- Push the queries and updates into a remote database.
+  - *Problem with this? This moves the problem out of our application, but doesn’t really solve fault tolerance in the database*
+
+**Solution == Log**
+
+- The **State-Machine Replication** approach would involve first writing to the log the operation that is to be performed, then having each replica apply the operations in the log order. In this case, the log would contain a sequence of commands like `“x+=5”` or `“y*=2”`
+- The **Primary-Backup Model** would choose one of the replicas to act as the primary (or leader or master).In this design, the log contains only the resulting variable values, like `“x=1”` or `“y=6”`, not the original commands that created the values. The remaining replicas would act as back‐ ups (or followers or slaves); they subscribe to this log and passively apply the new variable values to their local stores. When the leader fails, we would choose a new leader from among the remaining replicas.
+
+>**Ordering is key for ensuring consistency between replicas: reordering an addition and multiplication command will yield a different result, as will reordering two variable updates for the same variable.**
+
+* * * 
+
+#### Logs and Consensus
 
 
