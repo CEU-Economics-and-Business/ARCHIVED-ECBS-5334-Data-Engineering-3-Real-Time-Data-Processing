@@ -45,8 +45,8 @@
     - The slaves can then apply the changes recorded in the log to their own local data structures to stay in sync with the master
 
 **Other use-cases of log:**
-1.) publish/subscribe mechanism to transmit data to other replicas
 
+1.) publish/subscribe mechanism to transmit data to other replicas
 2.) consistency mechanism to order the updates that are applied to multiple replicas
 
 * * * 
