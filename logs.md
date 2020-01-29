@@ -30,8 +30,8 @@
 
 - Logs look like a file or a table. (array of bytes, array of records). However, it is important that we think about the log as an abstract data structure, not a text file
 
-<p align="center>The question is - Why study logs?</p>
-<p align="center>They record what happened and when</p>
+<p style="text-align: center;">The question is - Why study logs?</p>
+<p style="text-align: center;">They record what happened and when</p>
 
 
 
