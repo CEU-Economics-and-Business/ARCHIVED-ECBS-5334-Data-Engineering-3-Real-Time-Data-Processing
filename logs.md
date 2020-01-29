@@ -6,7 +6,7 @@
 
 #### Log
 
-<img src="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0101.png" width="400" height="400>
+<a href="https://learning.oreilly.com/library/view/i-heart-logs/9781491909379/assets/ihtl_0101.png" width="400" height="400></a>
                                                                                                            
 - Log is a series of loosely structured requests, errors, or other messages in a sequence of rotating text files
 - Humans do not read logs, it's not manageable when services and servers are involved
