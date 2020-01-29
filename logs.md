@@ -114,8 +114,20 @@ In case of a single server variables can be stored in memory/disk and can be upd
 
 >**Ordering is key for ensuring consistency between replicas: reordering an addition and multiplication command will yield a different result, as will reordering two variable updates for the same variable.**
 
-* * * 
+- Computer systems rarely need to decide a single value, they almost always handle a sequence of requests. So a log, rather than a simple single-value register, is the more natural abstraction.
 
-#### Logs and Consensus
+* * *
+
+#### Changelog - Tables and Events are Dual
+-  If you have a log of changes, you can apply these changes in order to create the table and capture the current state => This table will record the latest state for each key
+  - In addition to creating the original table, you can also transform it to create all kinds of derived tables
+- You can see tables and events as dual: tables support data at rest and logs capture change
+- Magic of the log: it is a  *complete log of change* => it holds not only the contents of the final version of the table, but can also recreate all other versions that might have existed.
+  -  Effectively, it's a backup of every previous state of the table
+- Version control in distributed data systems solve: managing distributed, concurrent changes in state
+  - A version control system usually models the sequence of patches, which is in effect a log
+    -  In version control systems, as in other distributed stateful systems, replication happens via the log: when you update, you just pull down the patches and apply them to your current snapshot
+
+* * *
 
 
