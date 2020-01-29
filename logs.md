@@ -191,7 +191,7 @@ It's worth noting that the data flows in both directions - it would take an army
 
 ![log](assets/log.png "LinkedIn log"){:height="250px" width="400px"}.
 
-<img src= "/uploads/assets/log.png" width="120" height="120">
+<img src= "assets/log.png" width="120" height="120">
 
 
 
