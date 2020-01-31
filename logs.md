@@ -4,7 +4,7 @@
 
 
 Reference:
-<img src="https://covers.oreillystatic.com/images/0636920034339/lrg.jpg" height="400" width="250">
+<img src="https://covers.oreillystatic.com/images/0636920034339/lrg.jpg" height="300" width="180">
 
 
 
