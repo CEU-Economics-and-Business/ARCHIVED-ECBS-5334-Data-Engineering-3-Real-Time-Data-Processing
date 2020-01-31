@@ -2,6 +2,16 @@
 
 >This notebook serves as an introduction to how logs work in distributed systems. We then will provide practical applications of these concepts to a variety of common uses: data integration, enterprise architecture, real-time data processing, and data system design.
 
+
+Reference:
+<img src="https://covers.oreillystatic.com/images/0636920034339/lrg.jpg" height="400" width="250">
+
+
+
+
+
+
+
 * * *
 
 #### Log
