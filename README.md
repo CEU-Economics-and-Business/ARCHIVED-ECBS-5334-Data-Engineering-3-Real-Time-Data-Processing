@@ -1,8 +1,6 @@
 [Home](./README.md) | 
 [Logs](./logs.md) | 
-[Structured Streaming](./spark_streaming.md) | 
 [Amazon Kinsesis](./amazon_kinesis.md) | 
-[Machine Learning](./machine_learning.md) | 
 [Help/Resources](./resources.md).
 
 ## Welcome
