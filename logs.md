@@ -1,3 +1,10 @@
+[Home](./README.md) | 
+[Logs](./logs.md) | 
+[Amazon Kinsesis](./amazon_kinesis.md) | 
+[Kinsesis Analytics](./amazon_kinesis_analytics.md) | 
+[Help/Resources](./resources.md).
+
+
 ## Logs in Distributed Systems
 
 >This notebook serves as an introduction to how logs work in distributed systems. We then will provide practical applications of these concepts to a variety of common uses: data integration, enterprise architecture, real-time data processing, and data system design.
