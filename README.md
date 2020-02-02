@@ -36,19 +36,25 @@ By the end of the course you will:
 - Understand the caveats that arise when you take these systems to production
 - You will have hands-on knowledge on how to build a simple, end-to-end real-time pipeline with Amazon Web Services (AWS) and Apache Spark
 
-#### Suggested readings:
-Note: Data, presentations, and code for the exercises will be provided. There is no compulsory reading for the class. 
+#### Readins readings:
+Note: Data, presentations, and code for the exercises will be provided. 
 
-- I Heart Logs: Event Data, Stream Processing, and Data Integration
-- Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems by Martin Kleppmann(sections)
+- Heart Logs: Event Data, Stream Processing, and Data Integration [Download](https://www.confluent.io/thank-you/thank-heart-logs/)
 
 **Course schedule and materials for each session** 
+This class runs for 2x300 minutes.
 
-1. Overview
-2. Message Brokers
-3. Intro to real-time data processing systems and Apache Spark’s Streaming module
-4. Real-time processing with Amazon Kinesis and Kinesis Analytics
-5. Deploying Machine Learning models to production for real-time predictions
+Week 1: 
+ * Spark Recap and Aggregations in Spark
+ * Data Infrastructures overview 
+ * Streaming Basics
+ * Spark Streaming basics 
+
+Week 2: Problems in Production
+ * Message Brokers
+ * AWS: Amazon Kinesis and Kinesis SQL
+ * Handling Late Data
+ * Exactly once processing
 
 # Contact
 |Instructor  | Teaching Assistant |
