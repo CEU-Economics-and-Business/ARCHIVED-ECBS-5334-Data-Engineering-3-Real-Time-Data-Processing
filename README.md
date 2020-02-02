@@ -11,7 +11,7 @@ Welcome to Data Engineering 3: Real-Time Data Processing.
 * For informal and in-class communication, we are using Slack
 * On this page you will find additional courseware, R and Python scripts, which accompany the course
 * In case you need help, you can find the instructor's and the TA's contact details at the bottom of this page
-* Before you'd reshare/reuse any of these materials keep in mind that <a href='https://datapao.com/'>Datapao</a> owns the copyright of the Spark notebooks (distributed separately). 
+* Before you'd reshare/reuse any of these materials keep in mind that <a href='https://datapao.com/'>Datapao</a> sponsors this course. Datapao owns the copyright of the Spark notebooks (distributed separately) and possibly other materials in this repository. Reach out to Zoltan C. Toth if you have any questions about this.
 
 ## Syllabus
 
