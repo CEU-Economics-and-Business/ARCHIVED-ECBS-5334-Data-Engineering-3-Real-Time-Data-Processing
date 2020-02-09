@@ -35,3 +35,28 @@ FROM "SOURCE_SQL_STREAM_001"
 -- SIMILAR TO compares string to a regex, may use ESCAPE
 WHERE "country" NOT IN ('HU', 'RO');
 ```
+
+
+Optional:
+
+Here is the Athena table definition command if you want to read from the Firehose Delivery stream:
+```
+CREATE EXTERNAL TABLE `ceu_test_table`(
+  `event_dime` timestamp COMMENT 'from deserializer', 
+  `iban_from` string COMMENT 'from deserializer', 
+  `iban_to` string COMMENT 'from deserializer', 
+  `country` string COMMENT 'from deserializer', 
+  `country_alpha` string COMMENT 'from deserializer', 
+  `amount_eur` int COMMENT 'from deserializer')
+ROW FORMAT SERDE 
+  'org.openx.data.jsonserde.JsonSerDe' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat'
+LOCATION
+  's3://ceu-lambda/ceu2020'
+TBLPROPERTIES (
+  'has_encrypted_data'='false', 
+  'transient_lastDdlTime'='1551165071')
+```
