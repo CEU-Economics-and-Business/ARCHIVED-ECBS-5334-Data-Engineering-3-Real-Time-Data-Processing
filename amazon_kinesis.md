@@ -1,3 +1,9 @@
+[Home](./README.md) | 
+[Logs](./logs.md) | 
+[Amazon Kinsesis](./amazon_kinesis.md) | 
+[Kinsesis Analytics](./amazon_kinesis_analytics.md) | 
+[Help/Resources](./resources.md).
+
 ## Amazon Kinesis 
 
 You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time. 
