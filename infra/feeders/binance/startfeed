@@ -1,0 +1,1 @@
+sudo docker run -ti --rm --init  daroczig/ceu-de3-docker-binance-streamer | jq -cr '. + {"event_time": (.E/1000)}' | tee /tmp/binance.log

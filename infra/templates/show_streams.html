@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+  <table class='table'>
+      <thead><tr>
+        <th>name</th>
+        <th>credential holder</th>
+        <th>status</th>
+        <th>expiry time</th>
+        <th>actions</th>
+      </tr></thead>
+  {% for entry in entries %}
+    <tr>
+        <th scope="row">{{ entry.stream_name }}</th>
+        <td style="font-size: 8pt; vertical-align: middle;">{{ entry.name }}</th>
+        <td>{{ entry.status }}</td>
+        <td>{{ entry.expiry_time }}</td>
+        <td>
+        {% if entry.status == "STOPPED" %}
+            <a class="btn btn-success" role="button" href="{{ url_for('start_stream') }}?arn={{entry.arn | urlencode }}">start</a>
+        {% else %}
+            <a class="btn btn-danger" role="button" href="{{ url_for('stop_stream') }}?arn={{entry.arn | urlencode }}">stop</a>
+            <a class="btn btn-info" role="button" href="{{ url_for('extend_expiry') }}?arn={{entry.arn | urlencode }}">extend expiry time</a>
+        {% endif %}
+        </td>
+    </tr>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </table>
+{% endblock %}

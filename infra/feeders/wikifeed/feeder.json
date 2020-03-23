@@ -1,0 +1,18 @@
+{
+  "cloudwatch.emitMetrics": true,
+  "kinesis.endpoint": "https://kinesis.eu-west-1.amazonaws.com",
+  "firehose.endpoint": "https://firehose.eu-west-1.amazonaws.com",
+  "awsAccessKeyId":"",
+  "awsSecretAccessKey":"",
+  "checkpointFile": "/home/ec2-user/wikifeed/checkpoint",
+  "flows": [
+    {
+      "filePattern": "/tmp/wiki.log*",
+      "kinesisStream": "CEU-Wiki",
+      "partitionKeyOption": "RANDOM",
+      "maxBufferAgeMillis": 1000,
+      "maxBufferSizeRecords": 500,
+      "initialPosition": "END_OF_FILE"
+    }
+  ]
+}

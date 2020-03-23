@@ -1,0 +1,17 @@
+venv/*
+.idea
+__pycache__
+*.pyc
+
+feeder-config/*
+/app.db
+data/*
+
+derby.log
+metastore_db
+.DS_Store
+
+checkpoint
+feeder.log*
+
+virtualenv/

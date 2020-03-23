@@ -1,0 +1,1 @@
+ps ax | grep daro | cut -d' ' -f2 | head -1 | xargs sudo kill
